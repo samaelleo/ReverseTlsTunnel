@@ -57,8 +57,8 @@ install_rtt() {
 # Function to configure arguments based on user's choice
 configure_arguments() {
     read -p "Which server do you want to use? (Enter '1' for Iran(internal-server) or '2' for Kharej(external-server) ) : " server_choice
-    read -p "Please Enter SNI (default : splus.ir): " sni
-    sni=${sni:-splus.ir}
+    read -p "Please Enter SNI (default : sheypoor.com): " sni
+    sni=${sni:-sheypoor.com}
     read -p "Do you want to use mux? (yes/no): " use_mux
     mux_width=2
     if [ "$use_mux" == "yes" ]; then
@@ -131,8 +131,8 @@ check_lbinstalled() {
 # Function to configure arguments2 based on user's choice
 configure_arguments2() {
     read -p "Which server do you want to use? (Enter '1' for Iran(internal-server) or '2' for Kharej(external-server) ) : " server_choice
-    read -p "Please Enter SNI (default : splus.ir): " sni
-    sni=${sni:-splus.ir}
+    read -p "Please Enter SNI (default : sheypoor.com): " sni
+    sni=${sni:-sheypoor.com}
     read -p "Do you want to use mux? (yes/no): " use_mux
     mux_width=2
     if [ "$use_mux" == "yes" ]; then
