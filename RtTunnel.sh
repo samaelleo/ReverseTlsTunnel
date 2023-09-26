@@ -73,8 +73,8 @@ install_rtt_custom() {
         echo "Update is canceled."
         exit
     fi
-    #get custom version
-    read -p "Please Enter your custom version (e.g : 3.5) : " version
+    # Get custom version
+    read -p "Please Enter your custom version (e.g : 3.6) : " version
     apt-get update -y
 
     echo "Downloading ReverseTlsTunnel version : $version"
@@ -82,16 +82,16 @@ install_rtt_custom() {
     printf "\n"
 
     case $(uname -m) in
-        x86_64)  URL="https://github.com/radkesvat/ReverseTlsTunnel/releases/download/V$version/v$version_linux_amd64.zip" ;;
-        arm)     URL="https://github.com/radkesvat/ReverseTlsTunnel/releases/download/V$version/v$version_linux_arm64.zip" ;;
-        aarch64) URL="https://github.com/radkesvat/ReverseTlsTunnel/releases/download/V$version/v$version_linux_arm64.zip" ;;
+        x86_64)  URL="https://github.com/radkesvat/ReverseTlsTunnel/releases/download/V$version/v${version}_linux_amd64.zip" ;;
+        arm)     URL="https://github.com/radkesvat/ReverseTlsTunnel/releases/download/V$version/v${version}_linux_arm64.zip" ;;
+        aarch64) URL="https://github.com/radkesvat/ReverseTlsTunnel/releases/download/V$version/v${version}_linux_arm64.zip" ;;
         *)       echo "Unable to determine system architecture."; exit 1 ;;
     esac
 
-    wget $URL -O v$version_linux_amd64.zip
-    unzip -o v$version_linux_amd64.zip
+    wget $URL -O v${version}_linux_amd64.zip
+    unzip -o v${version}_linux_amd64.zip
     chmod +x RTT
-    rm v$version_linux_amd64.zip
+    rm v${version}_linux_amd64.zip
 
     echo "Finished."
 }
