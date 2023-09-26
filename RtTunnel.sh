@@ -51,7 +51,8 @@ check_installed() {
 
 # last or custom version
 install_selected_version() {
-    read -p "Do you want to install the Last version? (yes/no, default: yes): " choice
+    clear
+    read -p "Do you want to install the Last version? [yes/no] default: yes): " choice
 
     if [[ "$choice" == "no" ]]; then
         install_rtt_custom
