@@ -114,7 +114,7 @@ configure_arguments() {
     if [ "$server_choice" == "2" ]; then
         read -p "Please Enter (IRAN IP(internal-server)) : " server_ip
         read -p "Please Enter Password (Please choose the same password on both servers): " password
-        arguments="--kharej --iran-ip:$server_ip --iran-port:443 --toip:127.0.0.1 --toport:multiport --password:$password --sni:$sni --mux-width:$mux_width --terminate:24"
+        arguments="--kharej --iran-ip:$server_ip --iran-port:443 --toip:127.0.0.1 --toport:multiport --password:$password --sni:$sni $mux_argument--terminate:24"
     elif [ "$server_choice" == "1" ]; then
         read -p "Please Enter Password (Please choose the same password on both servers): " password
         read -p "Do you want to use fake upload? (yes/no): " use_fake_upload
@@ -181,8 +181,7 @@ configure_arguments2() {
     if [ "$use_mux" == "yes" ]; then
         read -p "Enter mux-width (default: 2): " mux_width
         mux_width=${mux_width:-2}
-    else
-        mux_width=1
+        mux_argument="--mux-width:$mux_width"
     fi
 
     if [ "$server_choice" == "2" ]; then
