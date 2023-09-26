@@ -12,7 +12,7 @@
 -  برای اپدیت 5 رو انتخاب کنید.
 - فایل RTT پس از کامپایل در مسیر ReverseTlsTunnel/dist ذخیره میشود.
 - قابلیت Fake Upload برای سرور ایران اضافه شده.
-
+- امکان نصب ورژن دلخواه. custom version
 - توضیحات کامل در صفحه ی [Radkesvat](https://github.com/radkesvat/ReverseTlsTunnel/tree/master)
 
 ## Install 
