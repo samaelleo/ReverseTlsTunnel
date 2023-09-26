@@ -49,10 +49,53 @@ check_installed() {
     fi
 }
 
+# last or custom version
+install_selected_version() {
+    read -p "Do you want to install the Last version? (yes/no, default: yes): " choice
+
+    if [[ "$choice" == "no" ]]; then
+        install_rtt_custom
+    else
+        install_rtt
+    fi
+}
+
 # Function to download and install RTT
 install_rtt() {
     wget "https://raw.githubusercontent.com/radkesvat/ReverseTlsTunnel/master/install.sh" -O install.sh && chmod +x install.sh && bash install.sh
 }
+
+
+#custom version
+install_rtt_custom() {
+    if pgrep -x "RTT" > /dev/null; then
+        echo "Tunnel is running! You must stop the tunnel before update. (pkill RTT)"
+        echo "Update is canceled."
+        exit
+    fi
+    #get custom version
+    read -p "Please Enter your custom version (e.g : 3.5) : " version
+    apt-get update -y
+
+    echo "Downloading ReverseTlsTunnel version : $version"
+
+    printf "\n"
+
+    case $(uname -m) in
+        x86_64)  URL="https://github.com/radkesvat/ReverseTlsTunnel/releases/download/V$version/v$version_linux_amd64.zip" ;;
+        arm)     URL="https://github.com/radkesvat/ReverseTlsTunnel/releases/download/V$version/v$version_linux_arm64.zip" ;;
+        aarch64) URL="https://github.com/radkesvat/ReverseTlsTunnel/releases/download/V$version/v$version_linux_arm64.zip" ;;
+        *)       echo "Unable to determine system architecture."; exit 1 ;;
+    esac
+
+    wget $URL -O v$version_linux_amd64.zip
+    unzip -o v$version_linux_amd64.zip
+    chmod +x RTT
+    rm v$version_linux_amd64.zip
+
+    echo "Finished."
+}
+
 
 # Function to configure arguments based on user's choice
 configure_arguments() {
@@ -93,7 +136,7 @@ install() {
     root_access
     check_dependencies
     check_installed
-    install_rtt
+    install_selected_version
     # Change directory to /etc/systemd/system
     cd /etc/systemd/system
 
@@ -191,7 +234,7 @@ load-balancer() {
     root_access
     check_dependencies
     check_lbinstalled
-    install_rtt
+    install_selected_version
     # Change directory to /etc/systemd/system
     cd /etc/systemd/system
     configure_arguments2
