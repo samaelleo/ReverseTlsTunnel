@@ -14,7 +14,7 @@
 - قابلیت Fake Upload برای سرور ایران اضافه شده.
 - امکان نصب ورژن دلخواه. custom version
 - توضیحات کامل در صفحه ی [Radkesvat](https://github.com/radkesvat/ReverseTlsTunnel/tree/master)
-
+- برای نسخه های قدیمی اپلود فیک را فعال نکنید. تانل متصل نمیشود.
 ## Install 
 
 ```
