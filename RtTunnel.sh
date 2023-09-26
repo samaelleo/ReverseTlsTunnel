@@ -108,9 +108,9 @@ configure_arguments() {
     if [ "$use_mux" == "yes" ]; then
         read -p "Enter mux-width (default: 2): " mux_width
         mux_width=${mux_width:-2}
-    else
-        mux_width=1
+        mux_argument="--mux-width:$mux_width"
     fi
+
 
     if [ "$server_choice" == "2" ]; then
         read -p "Please Enter (IRAN IP(internal-server)) : " server_ip
@@ -122,9 +122,9 @@ configure_arguments() {
         if [ "$use_fake_upload" == "yes" ]; then
             read -p "Enter upload-to-download ratio (e.g., 5 for 5:1 ratio): " upload_ratio
             upload_ratio=$((upload_ratio - 1))
-            arguments="--iran --lport:23-65535 --sni:$sni --password:$password --mux-width:$mux_width --noise:$upload_ratio --terminate:24"
+            arguments="--iran --lport:23-65535 --sni:$sni --password:$password $mux_argument --noise:$upload_ratio --terminate:24"
         else
-            arguments="--iran --lport:23-65535 --sni:$sni --password:$password --mux-width:$mux_width --terminate:24"
+            arguments="--iran --lport:23-65535 --sni:$sni --password:$password $mux_argument --terminate:24"
         fi
     else
         echo "Invalid choice. Please enter '1' or '2'."
