@@ -388,6 +388,11 @@ compile() {
     echo "RTT file is located at: ReverseTlsTunnel/dist"
 }
 
+display_lbtunnel_status() {
+    echo "Load-Balancer is:"
+    check_service_status "lbtunnel.service"
+}
+
 
 #ip & version
 myip=$(hostname -I | awk '{print $1}')
@@ -398,6 +403,7 @@ clear
 echo "By --> Peyman * Github.com/Ptechgithub * "
 echo "Your IP is: ($myip) "
 echo ""
+display_lbtunnel_status
 echo " --------#- Reverse Tls Tunnel -#--------"
 echo "1) Install (Multiport)"
 echo "2) Uninstall (Multiport)"
