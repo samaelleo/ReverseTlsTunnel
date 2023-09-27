@@ -396,7 +396,7 @@ start_tunnel() {
     # Check if the service is installed
     if sudo systemctl is-enabled --quiet tunnel.service; then
         # Service is installed, start it
-        sudo systemctl start tunnel.service
+        sudo systemctl start tunnel.service > /dev/null 2>&1
 
         if sudo systemctl is-active --quiet tunnel.service; then
             echo "Tunnel service started."
@@ -412,7 +412,7 @@ stop_tunnel() {
     # Check if the service is installed
     if sudo systemctl is-enabled --quiet tunnel.service; then
         # Service is installed, stop it
-        sudo systemctl stop tunnel.service > /dev/null
+        sudo systemctl stop tunnel.service > /dev/null 2>&1
 
         if sudo systemctl is-active --quiet tunnel.service; then
             echo "Tunnel service failed to stop."
@@ -438,7 +438,7 @@ start_lb_tunnel() {
     # Check if the service is installed
     if sudo systemctl is-enabled --quiet lbtunnel.service; then
         # Service is installed, start it
-        sudo systemctl start lbtunnel.service
+        sudo systemctl start lbtunnel.service > /dev/null 2>&1
 
         if sudo systemctl is-active --quiet lbtunnel.service; then
             echo "Tunnel service started."
@@ -455,7 +455,7 @@ stop_lb_tunnel() {
     # Check if the service is installed
     if sudo systemctl is-enabled --quiet lbtunnel.service; then
         # Service is installed, stop it
-        sudo systemctl stop lbtunnel.service > /dev/null
+        sudo systemctl stop lbtunnel.service > /dev/null 2>&1
 
         if sudo systemctl is-active --quiet lbtunnel.service; then
             echo "Load-Balancer failed to stop."
