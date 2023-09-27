@@ -473,7 +473,6 @@ echo " ----------------------------"
 echo "11) Update RTT"
 echo "12) Compile RTT"
 echo "0) Exit"
-echo ""
 echo " --------------$version--------------"
 read -p "Please choose: " choice
 
