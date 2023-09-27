@@ -489,7 +489,7 @@ echo "**********************"
 check_tunnel_status
 check_lb_tunnel_status
 echo "**********************"
-echo " --------#- Reverse Tls Tunnel -#--------"
+echo " -0-------#- Reverse Tls Tunnel -#--------"
 echo "1) Install (Multiport)"
 echo "2) Uninstall (Multiport)"
 echo "3) Start Multiport"
