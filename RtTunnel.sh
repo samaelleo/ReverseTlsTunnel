@@ -430,16 +430,6 @@ check_lb_tunnel_status() {
     fi
 }
 
-# Function to check if a service is active
-check_service_status() {
-    local service_name="$1"
-    if sudo systemctl is-active --quiet "$service_name"; then
-        echo "$service_name is running."
-    else
-        echo "$service_name is not running."
-    fi
-}
-
 # Function to check if lbtunnel.service and tunnel.service are active
 check_service_status() {
     local service_name="$1"
