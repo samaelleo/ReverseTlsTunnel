@@ -404,7 +404,7 @@ start_tunnel() {
             echo "Tunnel service failed to start."
         fi
     else
-        echo "Tunnel is not installed."
+        echo "Multiport Tunnel is not installed."
     fi
 }
 
