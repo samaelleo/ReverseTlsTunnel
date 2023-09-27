@@ -452,9 +452,19 @@ start_lb_tunnel() {
 
 
 stop_lb_tunnel() {
-    # Stop the load balancer tunnel service
-    sudo systemctl stop lbtunnel.service
-    echo "Load balancer tunnel service stopped."
+    # Check if the service is installed
+    if sudo systemctl is-enabled --quiet lbtunnel.service; then
+        # Service is installed, stop it
+        sudo systemctl stop lbtunnel.service
+
+        if sudo systemctl is-active --quiet lbtunnel.service; then
+            echo "Load-Balancer failed to stop."
+        else
+            echo "Load-Balancer stopped."
+        fi
+    else
+        echo "Load-Balancer is not installed."
+    fi
 }
 
 check_lb_tunnel_status() {
