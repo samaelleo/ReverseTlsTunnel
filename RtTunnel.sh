@@ -391,14 +391,20 @@ compile() {
     echo "RTT file is located at: ReverseTlsTunnel/dist"
 }
 
+# Function to start the tunnel service
 start_tunnel() {
-    # Start the tunnel service
-    sudo systemctl start tunnel.service
+    # Check if the service is installed
+    if sudo systemctl is-enabled tunnel.service; then
+        # Service is installed, start it
+        sudo systemctl start tunnel.service
 
-    if sudo systemctl is-active --quiet tunnel.service; then
-        echo "Tunnel service started."
+        if sudo systemctl is-active --quiet tunnel.service; then
+            echo "Tunnel service started."
+        else
+            echo "Tunnel service failed to start."
+        fi
     else
-        echo "Tunnel service failed to start."
+        echo "Tunnel is not installed."
     fi
 }
 
