@@ -310,6 +310,7 @@ update_services() {
     # Compare the installed version with the latest version
     if [[ "$latest_version" > "$installed_version" ]]; then
         echo "Updating to $latest_version (Installed: $installed_version)..."
+        
         if sudo systemctl is-active --quiet tunnel.service; then
             echo "tunnel.service is active, stopping..."
             sudo systemctl stop tunnel.service > /dev/null 2>&1
@@ -322,12 +323,14 @@ update_services() {
         wget "https://raw.githubusercontent.com/radkesvat/ReverseTlsTunnel/master/install.sh" -O install.sh && chmod +x install.sh && bash install.sh
 
         # Start the previously active service
-        if sudo systemctl is-active --quiet tunnel.service; then
-            echo "Restarting tunnel.service..."
-            sudo systemctl start tunnel.service > /dev/null 2>&1
-        elif sudo systemctl is-active --quiet lbtunnel.service; then
-            echo "Restarting lbtunnel.service..."
-            sudo systemctl start lbtunnel.service > /dev/null 2>&1
+        if sudo systemctl list-units --type=service --all | grep -q 'tunnel.service'; then
+            echo "Starting tunnel.service..."
+            sudo systemctl start tunnel.service
+        fi
+
+        if sudo systemctl list-units --type=service --all | grep -q 'lbtunnel.service'; then
+            echo "Starting lbtunnel.service..."
+            sudo systemctl start lbtunnel.service
         fi
 
         echo "Service updated and restarted successfully."
