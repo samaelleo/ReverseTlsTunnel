@@ -417,19 +417,22 @@ check_tunnel_status() {
     fi
 }
 
-# Check if the service is installed
-if sudo systemctl is-enabled lbtunnel.service; then
-    # Service is installed, start it
-    sudo systemctl start lbtunnel.service
+# Function to start the tunnel service
+start_lb_tunnel() {
+    # Check if the service is installed
+    if sudo systemctl is-enabled lbtunnel.service; then
+        # Service is installed, start it
+        sudo systemctl start lbtunnel.service
 
-    if sudo systemctl is-active --quiet lbtunnel.service; then
-        echo "Tunnel service started."
+        if sudo systemctl is-active --quiet lbtunnel.service; then
+            echo "Tunnel service started."
+        else
+            echo "Tunnel service failed to start."
+        fi
     else
-        echo "Tunnel service failed to start."
+        echo "Load-Balancer is not installed."
     fi
-else
-    echo "Load-Balancer is not installed."
-fi
+}
 
 
 stop_lb_tunnel() {
