@@ -394,7 +394,7 @@ compile() {
 # Function to start the tunnel service
 start_tunnel() {
     # Check if the service is installed
-    if sudo systemctl is-enabled tunnel.service; then
+    if sudo systemctl is-enabled --quiet tunnel.service; then
         # Service is installed, start it
         sudo systemctl start tunnel.service
 
@@ -426,7 +426,7 @@ check_tunnel_status() {
 # Function to start the tunnel service
 start_lb_tunnel() {
     # Check if the service is installed
-    if sudo systemctl is-enabled lbtunnel.service; then
+    if sudo systemctl is-enabled --quiet lbtunnel.service; then
         # Service is installed, start it
         sudo systemctl start lbtunnel.service
 
