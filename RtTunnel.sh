@@ -99,20 +99,22 @@ install_rtt_custom() {
 
 # Function to configure arguments based on user's choice
 configure_arguments() {
-    read -p "Which server do you want to use? (Enter '1' for Iran(internal-server) or '2' for Kharej(external-server) ) : " server_choice
-    read -p "Please Enter SNI (default : sheypoor.com): " sni
+    read -p "Which server do you want to use? (Enter '1' for Iran(internal-server) or '2' for Kharej(external-server)): " server_choice
+    read -p "Please Enter SNI (default: sheypoor.com): " sni
     sni=${sni:-sheypoor.com}
+    
     read -p "Do you want to use mux? (yes/no): " use_mux
     mux_width=2
+    mux_argument=""
+    
     if [ "$use_mux" == "yes" ]; then
         read -p "Enter mux-width (default: 2): " mux_width
         mux_width=${mux_width:-2}
         mux_argument="--mux-width:$mux_width"
     fi
-
-
+    
     if [ "$server_choice" == "2" ]; then
-        read -p "Please Enter (IRAN IP(internal-server)) : " server_ip
+        read -p "Please Enter IRAN IP (internal-server): " server_ip
         read -p "Please Enter Password (Please choose the same password on both servers): " password
         arguments="--kharej --iran-ip:$server_ip --iran-port:443 --toip:127.0.0.1 --toport:multiport --password:$password --sni:$sni $mux_argument --terminate:24"
     elif [ "$server_choice" == "1" ]; then
