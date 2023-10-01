@@ -121,9 +121,9 @@ configure_arguments() {
         if [ "$use_fake_upload" == "yes" ]; then
             read -p "Enter upload-to-download ratio (e.g., 5 for 5:1 ratio): " upload_ratio
             upload_ratio=$((upload_ratio - 1))
-            arguments="--iran --lport:23-65535 --sni:$sni --password:$password $mux_argument--noise:$upload_ratio --terminate:24"
+            arguments="--iran --lport:23-65535 --sni:$sni --password:$password $mux_argument --noise:$upload_ratio --terminate:24"
         else
-            arguments="--iran --lport:23-65535 --sni:$sni --password:$password $mux_argument--terminate:24"
+            arguments="--iran --lport:23-65535 --sni:$sni --password:$password $mux_argument --terminate:24"
         fi
     else
         echo "Invalid choice. Please enter '1' or '2'."
