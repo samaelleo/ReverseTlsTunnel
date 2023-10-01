@@ -131,6 +131,11 @@ configure_arguments() {
         echo "Invalid choice. Please enter '1' or '2'."
         exit 1
     fi
+
+    read -p "Do you want to enable UDP? (yes/no): " enable_udp
+    if [ "$enable_udp" == "yes" ]; then
+        arguments="$arguments --accept-udp"
+    fi
 }
 
 # Function to handle installation
