@@ -520,7 +520,7 @@ echo -e "${yellow} ----------------------------${rest}"
 echo -e "${cyan}11) Update RTT${rest}"
 echo -e "${cyan}12) Compile RTT${rest}"
 echo "0) Exit"
-echo -e "${yellow} --------------${cyan}$version${yellow}--------------${rest}"
+echo -e "${purple} --------------${cyan}$version${purple}--------------${rest}"
 read -p "Please choose: " choice
 
 case $choice in
