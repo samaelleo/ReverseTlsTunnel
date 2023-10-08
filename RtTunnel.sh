@@ -499,7 +499,7 @@ version=$(./RTT -v 2>&1 | grep -o 'version="[0-9.]*"')
 # Main menu
 clear
 echo "By --> Peyman * Github.com/Ptechgithub * "
-echo "Your IP is: ($myip) "
+echo -e "Your IP is: ${cyan}($myip)${rest} "
 echo "**********************"
 check_tunnel_status
 check_lb_tunnel_status
