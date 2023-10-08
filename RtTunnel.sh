@@ -500,10 +500,10 @@ version=$(./RTT -v 2>&1 | grep -o 'version="[0-9.]*"')
 clear
 echo -e "${cyan}By --> Peyman * Github.com/Ptechgithub * ${rest}"
 echo -e "Your IP is: ${cyan}($myip)${rest} "
-echo -e "${yellow}**********************${rest}"
+echo -e "${yellow}******************************${rest}"
 check_tunnel_status
 check_lb_tunnel_status
-echo -e "${yellow}**********************${rest}"
+echo -e "${yellow}******************************${rest}"
 echo -e " ${purple}--------#- Reverse Tls Tunnel -#--------${rest}"
 echo -e "${green}1) Install (Multiport)${rest}"
 echo -e "${red}2) Uninstall (Multiport)${rest}"
