@@ -546,7 +546,7 @@ install_custom() {
     check_dependencies
     check_c_installed
     install_selected_version
-    
+    cd /etc/systemd/system
     read -p "Enter RTT arguments (Example: RTT --iran --lport:443 --sni:splus.ir --password:123): " arguments
     
     # Create the c_tunnel.service file with user input
