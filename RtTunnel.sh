@@ -672,9 +672,12 @@ case $choice in
         stop_c_tunnel
         ;;
     15) 
+        check_c_tunnel_status
+        ;;
+    16) 
         update_services
         ;;
-    16)
+    17)
         compile
         ;;
     0)   
