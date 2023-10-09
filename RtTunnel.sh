@@ -491,6 +491,105 @@ check_lb_tunnel_status() {
     fi
 }
 
+check_c_installed() {
+    if [ -f "/etc/systemd/system/c_tunnel.service" ]; then
+        echo "The Load-balancer is already installed."
+        exit 1
+    fi
+}
+
+# Function to start the tunnel service
+start_c_tunnel() {
+    # Check if the service is installed
+    if sudo systemctl is-enabled --quiet c_tunnel.service; then
+        # Service is installed, start it
+        sudo systemctl start c_tunnel.service > /dev/null 2>&1
+
+        if sudo systemctl is-active --quiet c_tunnel.service; then
+            echo "Tunnel service started."
+        else
+            echo "Tunnel service failed to start."
+        fi
+    else
+        echo "Multiport Tunnel is not installed."
+    fi
+}
+
+check_c_tunnel_status() {
+    # Check the status of the load balancer tunnel service
+    if sudo systemctl is-active --quiet ctunnel.service; then
+        echo -e "${yellow}Custom Tunnel is: ${green}[running ✔]${rest}"
+    else
+        echo -e "${yellow}Custom Tunnel is:${red}[Not running ✗ ]${rest}"
+    fi
+}
+
+
+stop_c_tunnel() {
+    # Check if the service is installed
+    if sudo systemctl is-enabled --quiet c_tunnel.service; then
+        # Service is installed, stop it
+        sudo systemctl stop c_tunnel.service > /dev/null 2>&1
+
+        if sudo systemctl is-active --quiet c_tunnel.service; then
+            echo "Tunnel service failed to stop."
+        else
+            echo "Tunnel service stopped."
+        fi
+    else
+        echo "Multiport Tunnel is not installed."
+    fi
+}
+
+install_custom() {
+    root_access
+    check_dependencies
+    check_c_installed
+    install_selected_version
+    
+    read -p "Enter RTT arguments (Example: RTT --iran --lport:443 --sni:splus.ir --password:123): " arguments
+    
+    # Create the c_tunnel.service file with user input
+    cat <<EOL > c_tunnel.service
+[Unit]
+Description=my c_tunnel service
+
+[Service]
+Type=idle
+User=root
+WorkingDirectory=/root
+ExecStart=/root/$arguments
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOL
+
+    # Reload systemctl daemon and start the service
+    sudo systemctl daemon-reload
+    sudo systemctl start c_tunnel.service
+    sudo systemctl enable c_tunnel.service
+}
+
+c_uninstall() {
+    # Check if the service is installed
+    if [ ! -f "/etc/systemd/system/c_tunnel.service" ]; then
+        echo "The Load-balancer is not installed."
+        return
+    fi
+
+    # Stop and disable the service
+    sudo systemctl stop c_tunnel.service
+    sudo systemctl disable c_tunnel.service
+
+    # Remove service file
+    sudo rm /etc/systemd/system/c_tunnel.service
+    sudo systemctl reset-failed
+    sudo rm RTT
+    sudo rm install.sh 2>/dev/null
+
+    echo "Uninstallation completed successfully."
+}
 
 #ip  & version
 myip=$(hostname -I | awk '{print $1}')
@@ -503,6 +602,7 @@ echo -e "Your IP is: ${cyan}($myip)${rest} "
 echo -e "${yellow}******************************${rest}"
 check_tunnel_status
 check_lb_tunnel_status
+check_c_tunnel_status
 echo -e "${yellow}******************************${rest}"
 echo -e " ${purple}--------#- Reverse Tls Tunnel -#--------${rest}"
 echo -e "${green}1) Install (Multiport)${rest}"
@@ -517,8 +617,13 @@ echo "8) Start Load Balancer"
 echo "9) Stop Load Balancer"
 echo "10) Check status"
 echo -e "${yellow} ----------------------------${rest}"
-echo -e "${cyan}11) Update RTT${rest}"
-echo -e "${cyan}12) Compile RTT${rest}"
+echo -e "${green}11) Install Custom${rest}"
+echo -e "${red}12) Uninstall Custom${rest}"
+echo "13) Start Custom"
+echo "14) Stop Custom"
+echo "15) Check status"
+echo -e "${cyan}16) Update RTT${rest}"
+echo -e "${cyan}17 Compile RTT${rest}"
 echo "0) Exit"
 echo -e "${purple} --------------${cyan}$version${purple}--------------${rest}"
 read -p "Please choose: " choice
@@ -554,10 +659,22 @@ case $choice in
     10)
         check_lb_tunnel_status
         ;;
-    11) 
-        update_services
+    11)
+        install_custom
         ;;
     12)
+        c_uninstall
+        ;;
+    13)
+        start_c_tunnel
+        ;;
+    14) 
+        stop_c_tunnel
+        ;;
+    15) 
+        update_services
+        ;;
+    16)
         compile
         ;;
     0)   
