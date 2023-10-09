@@ -498,11 +498,11 @@ check_c_installed() {
     fi
 }
 
-# Function to start the tunnel service
+# Function to start the custom tunnel service
 start_c_tunnel() {
     # Check if the service is installed
     if sudo systemctl is-enabled --quiet custom_tuunel.service; then
-        # Service is installed, start it
+    
         sudo systemctl start custom_tuunel.service > /dev/null 2>&1
 
         if sudo systemctl is-active --quiet custom_tuunel.service; then
