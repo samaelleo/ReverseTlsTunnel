@@ -528,7 +528,7 @@ check_c_tunnel_status() {
 stop_c_tunnel() {
     # Check if the service is installed
     if sudo systemctl is-enabled --quiet custom_tuunel.service; then
-        # Service is installed, stop it
+    
         sudo systemctl stop custom_tuunel.service > /dev/null 2>&1
 
         if sudo systemctl is-active --quiet custom_tuunel.service; then
