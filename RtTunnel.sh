@@ -517,7 +517,7 @@ start_c_tunnel() {
 
 check_c_tunnel_status() {
     # Check the status of the load balancer tunnel service
-    if sudo systemctl is-active --quiet ctunnel.service; then
+    if sudo systemctl is-active --quiet custom_tuunel.service; then
         echo -e "${yellow}Custom Tunnel is: ${green}[running ✔]${rest}"
     else
         echo -e "${yellow}Custom Tunnel is:${red}[Not running ✗ ]${rest}"
