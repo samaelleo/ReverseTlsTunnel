@@ -492,7 +492,7 @@ check_lb_tunnel_status() {
 }
 
 check_c_installed() {
-    if [ -f "/etc/systemd/system/custom_tuunel.service" ]; then
+    if [ -f "/etc/systemd/system/custom_tunnel.service" ]; then
         echo "The Custom Tunnel is already installed."
         exit 1
     fi
@@ -501,11 +501,11 @@ check_c_installed() {
 # Function to start the custom tunnel service
 start_c_tunnel() {
     # Check if the service is installed
-    if sudo systemctl is-enabled --quiet custom_tuunel.service; then
+    if sudo systemctl is-enabled --quiet custom_tunnel.service; then
     
-        sudo systemctl start custom_tuunel.service > /dev/null 2>&1
+        sudo systemctl start custom_tunnel.service > /dev/null 2>&1
 
-        if sudo systemctl is-active --quiet custom_tuunel.service; then
+        if sudo systemctl is-active --quiet custom_tunnel.service; then
             echo "Custom Tunnel started."
         else
             echo "Custom Tunnel failed to start."
@@ -517,7 +517,7 @@ start_c_tunnel() {
 
 check_c_tunnel_status() {
     # Check the status of the load balancer tunnel service
-    if sudo systemctl is-active --quiet custom_tuunel.service; then
+    if sudo systemctl is-active --quiet custom_tunnel.service; then
         echo -e "${yellow}Custom Tunnel is: ${green}[running ✔]${rest}"
     else
         echo -e "${yellow}Custom Tunnel is:${red}[Not running ✗ ]${rest}"
@@ -527,11 +527,11 @@ check_c_tunnel_status() {
 
 stop_c_tunnel() {
     # Check if the service is installed
-    if sudo systemctl is-enabled --quiet custom_tuunel.service; then
+    if sudo systemctl is-enabled --quiet custom_tunnel.service; then
     
-        sudo systemctl stop custom_tuunel.service > /dev/null 2>&1
+        sudo systemctl stop custom_tunnel.service > /dev/null 2>&1
 
-        if sudo systemctl is-active --quiet custom_tuunel.service; then
+        if sudo systemctl is-active --quiet custom_tunnel.service; then
             echo "Custom Tunnel failed to stop."
         else
             echo "Custom Tunnel stopped."
@@ -549,8 +549,8 @@ install_custom() {
     cd /etc/systemd/system
     read -p "Enter RTT arguments (Example: RTT --iran --lport:443 --sni:splus.ir --password:123): " arguments
     
-    # Create the custom_tuunel.service file with user input
-    cat <<EOL > custom_tuunel.service
+    # Create the custom_tunnel.service file with user input
+    cat <<EOL > custom_tunnel.service
 [Unit]
 Description=my custom tunnel service
 
@@ -567,23 +567,23 @@ EOL
 
     # Reload systemctl daemon and start the service
     sudo systemctl daemon-reload
-    sudo systemctl start custom_tuunel.service
-    sudo systemctl enable custom_tuunel.service
+    sudo systemctl start custom_tunnel.service
+    sudo systemctl enable custom_tunnel.service
 }
 
 c_uninstall() {
     # Check if the service is installed
-    if [ ! -f "/etc/systemd/system/custom_tuunel.service" ]; then
+    if [ ! -f "/etc/systemd/system/custom_tunnel.service" ]; then
         echo "The Custom Tunnel is not installed."
         return
     fi
 
     # Stop and disable the service
-    sudo systemctl stop custom_tuunel.service
-    sudo systemctl disable custom_tuunel.service
+    sudo systemctl stop custom_tunnel.service
+    sudo systemctl disable custom_tunnel.service
 
     # Remove service file
-    sudo rm /etc/systemd/system/custom_tuunel.service
+    sudo rm /etc/systemd/system/custom_tunnel.service
     sudo systemctl reset-failed
     sudo rm RTT
     sudo rm install.sh 2>/dev/null
