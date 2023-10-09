@@ -552,7 +552,7 @@ install_custom() {
     # Create the c_tunnel.service file with user input
     cat <<EOL > c_tunnel.service
 [Unit]
-Description=my c_tunnel service
+Description=my custom tunnel service
 
 [Service]
 Type=idle
