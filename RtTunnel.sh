@@ -289,7 +289,7 @@ lb_uninstall() {
     sudo rm /etc/systemd/system/lbtunnel.service
     sudo systemctl reset-failed
     sudo rm RTT
-    sudo rm install.sh 2>/dev/nul
+    sudo rm install.sh 2>/dev/null
 
     echo "Uninstallation completed successfully."
 }
@@ -310,7 +310,7 @@ uninstall() {
     sudo rm /etc/systemd/system/tunnel.service
     sudo systemctl reset-failed
     sudo rm RTT
-    sudo rm install.sh 2>/dev/nul
+    sudo rm install.sh 2>/dev/null
 
     echo "Uninstallation completed successfully."
 }
