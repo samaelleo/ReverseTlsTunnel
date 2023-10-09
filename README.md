@@ -15,6 +15,7 @@
 - امکان نصب ورژن دلخواه. custom version
 - توضیحات کامل در صفحه ی [Radkesvat](https://github.com/radkesvat/ReverseTlsTunnel/tree/master)
 - برای نسخه های قدیمی اپلود فیک را فعال نکنید. تانل متصل نمیشود.
+- در حالت Custom شما دستورات را وارد میکنید و به صورت سرویس اجرا میشود. ابتدای دستورات با RTT آغاز شود.
 ## Install 
 
 ```
