@@ -493,7 +493,7 @@ check_lb_tunnel_status() {
 
 check_c_installed() {
     if [ -f "/etc/systemd/system/c_tunnel.service" ]; then
-        echo "The Load-balancer is already installed."
+        echo "The Custom Tunnel is already installed."
         exit 1
     fi
 }
@@ -506,12 +506,12 @@ start_c_tunnel() {
         sudo systemctl start c_tunnel.service > /dev/null 2>&1
 
         if sudo systemctl is-active --quiet c_tunnel.service; then
-            echo "Tunnel service started."
+            echo "Custom Tunnel started."
         else
-            echo "Tunnel service failed to start."
+            echo "Custom Tunnel failed to start."
         fi
     else
-        echo "Multiport Tunnel is not installed."
+        echo "Custom Tunnel is not installed."
     fi
 }
 
@@ -532,12 +532,12 @@ stop_c_tunnel() {
         sudo systemctl stop c_tunnel.service > /dev/null 2>&1
 
         if sudo systemctl is-active --quiet c_tunnel.service; then
-            echo "Tunnel service failed to stop."
+            echo "Custom Tunnel failed to stop."
         else
-            echo "Tunnel service stopped."
+            echo "Custom Tunnel stopped."
         fi
     else
-        echo "Multiport Tunnel is not installed."
+        echo "Custom Tunnel is not installed."
     fi
 }
 
@@ -574,7 +574,7 @@ EOL
 c_uninstall() {
     # Check if the service is installed
     if [ ! -f "/etc/systemd/system/c_tunnel.service" ]; then
-        echo "The Load-balancer is not installed."
+        echo "The Custom Tunnel is not installed."
         return
     fi
 
