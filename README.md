@@ -31,7 +31,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/Ptechgithub/ReverseTlsTunnel
 
 
 
-## Stargazers over time
+## Thanks for 🌟
 
 [![Stargazers over time](https://starchart.cc/Ptechgithub/ReverseTlsTunnel.svg)](https://starchart.cc/Ptechgithub/ReverseTlsTunnel)
 
