@@ -28,3 +28,10 @@ bash <(curl -fsSL https://raw.githubusercontent.com/Ptechgithub/ReverseTlsTunnel
 
 
 - با تشکر از [radkesvat](https://github.com/radkesvat/ReverseTlsTunnel/tree/master)
+
+
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/Ptechgithub/ReverseTlsTunnel.svg)](https://starchart.cc/Ptechgithub/ReverseTlsTunnel)
+
