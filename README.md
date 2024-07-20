@@ -19,7 +19,7 @@
 ## Install 
 
 ```
-bash <(curl -fsSL https://raw.githubusercontent.com/Ptechgithub/ReverseTlsTunnel/main/RtTunnel.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/samaelleo/ReverseTlsTunnel/main/RtTunnel.sh)
 ```
 
 
